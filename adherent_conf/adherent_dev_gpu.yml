@@ -2,7 +2,7 @@ version: '2.3'
 
 services:
   adherent_dev_gpu:
-    image: "ghcr.io/paolo-viceconte/adherent-docker-dev"
+    image: "ghcr.io/paolo-viceconte/adherent-docker-dev-gpu"
     container_name: "adherent_dev_gpu"
     command: "bash"
     init: true
