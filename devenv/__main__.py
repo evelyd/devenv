@@ -35,6 +35,13 @@ def main():
     # Create the file for docker-compose
     yaml.safe_dump(compose_yaml, args.output, default_flow_style=False)
 
+    # replace the wrong runtime line with the correct info
+    with open('devenv-docker-compose.yml', 'r') as file:
+        filedata = file.read()
+    filedata = filedata.replace('    runtime: nvidia', '    deploy:\n      resources:\n        reservations:\n          devices:\n            - driver: nvidia\n              count: all\n              capabilities: [ gpu ]')
+    with open('devenv-docker-compose.yml', 'w') as file:
+        file.write(filedata)
+
     if not args.generate:
         from compose.cli.main import main as compose_main
         sys.argv[:] = ['docker-compose', '-f', args.output.name] + extras
