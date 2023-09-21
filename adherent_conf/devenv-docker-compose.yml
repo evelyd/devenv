@@ -1,0 +1,46 @@
+services:
+  adherent_dev_gpu:
+    cap_add:
+    - SYS_PTRACE
+    command: bash
+    container_name: adherent_dev_gpu
+    devices:
+    - /dev/dri
+    dns:
+    - 8.8.8.8
+    environment:
+    - YARP_NAME_SPACE=/evelyd
+    - USERNAME=evelyd
+    - USER_UID=1000
+    - USER_GID=1000
+    - DISPLAY
+    - XAUTHORITY=/tmp/.adherent_dev_gpu.xauth
+    - GIT_USER_NAME=Evelyn D'Elia
+    - GIT_USER_EMAIL=17877131+evelyd@users.noreply.github.com
+    image: ghcr.io/paolo-viceconte/adherent-docker-dev-gpu
+    init: true
+    network_mode: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    security_opt:
+    - apparmor:unconfined
+    stdin_open: true
+    tty: true
+    volumes:
+    - /home/evelyd/git:/home/evelyd/git:rw
+    - /home/evelyd/.dockerdot/atom:/home/evelyd/.atom:rw
+    - /home/evelyd/.dockerdot/config/atom:/home/evelyd/.config/Atom:rw
+    - /home/evelyd/.dockerdot/ccache:/home/evelyd/.ccache:rw
+    - /home/evelyd/.dockerdot/config/qtcreator:/home/evelyd/.config/QtProject:rw
+    - /home/evelyd/.dockerdot/config/JetBrains:/home/evelyd/.config/JetBrains:rw
+    - /home/evelyd/.dockerdot/cache:/home/evelyd/.cache:rw
+    - /home/evelyd/.dockerdot/z:/home/evelyd/.z:rw
+    - /home/evelyd/.dockerdot/bash_history:/home/evelyd/.bash_history:rw
+    - /tmp/.adherent_dev_gpu.xauth:/tmp/.adherent_dev_gpu.xauth:rw
+    - /tmp/.X11-unix:/tmp/.X11-unix:rw
+version: '2.3'

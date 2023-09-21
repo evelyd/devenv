@@ -7,7 +7,7 @@ services:
     command: "bash"
     init: true
     environment:
-      - YARP_NAME_SPACE=/pviceconte
+      - YARP_NAME_SPACE=/evelyd
     stdin_open: true
     tty: true
     network_mode: "host"
@@ -20,7 +20,7 @@ services:
 devenv:
   version: '1.0'
   adherent_dev_gpu:
-    user: "pviceconte"
+    user: "evelyd"
     project_dir: "$HOME/git"
     resources:
       directories:
@@ -37,5 +37,5 @@ devenv:
     x11: "xauth"
     gdb: true
     git:
-      username: "Paolo Viceconte"
-      email: "paolomariaviceconte@gmail.com"
+      username: "Evelyn D'Elia"
+      email: "17877131+evelyd@users.noreply.github.com"
